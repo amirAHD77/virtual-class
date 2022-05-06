@@ -1,0 +1,53 @@
+@font-face {
+  font-family: "IRANSans";
+  font-style: normal;
+  src: url("/fonts/IRANSans.ttf") format("truetype");
+}
+
+html,
+body {
+  background-color: #888;
+}
+
+div {
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "IRANSans" !important;
+}
+
+.form-check-input:checked {
+  background-color: greenyellow !important;
+  border-color: greenyellow !important;
+}
+
+.form-check-input:focus {
+  outline: none;
+  box-shadow: none !important;
+  border-color: white !important;
+}
+
+.r1_iframe_embed {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  padding-top: 56.25%;
+}
+
+.r1_iframe_embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
