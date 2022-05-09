@@ -3,8 +3,22 @@ import { IoPeople, IoPerson } from "react-icons/io5";
 
 import { OnlineUsersContainer } from "./onlineUsers.style";
 import { colors } from "../config";
+import { GoKebabVertical } from "react-icons/go";
+import { Dropdown } from "react-bootstrap";
 
 const OnlineUsers = (props) => {
+  const Icon = React.forwardRef(({ children, onClick }, ref) => (
+    <a
+      href=""
+      ref={ref}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}
+    >
+      <GoKebabVertical style={{ position: "relative" }} />
+    </a>
+  ));
   return (
     <OnlineUsersContainer colors={colors}>
       <div className="header">
@@ -16,11 +30,25 @@ const OnlineUsers = (props) => {
       <div className="namesBox">
         {props.users.map((it, index) => (
           <div className="nameContainer" key={index}>
-            <div className="logo">
+            <div
+              className="logo"
+              style={
+                it.type === "TEACHER" ? { color: "rgb(24, 44, 97)" } : null
+              }
+            >
               <IoPerson />
             </div>
             <div className="name">
               {it?.fullName?.length ? it.fullName : null}
+              {it.type == "TEACHER" && (
+                <Dropdown align="end">
+                  <Dropdown.Toggle align="end" as={Icon}></Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item bsPrefix="dropdownItem">اخراج</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              )}
             </div>
           </div>
         ))}

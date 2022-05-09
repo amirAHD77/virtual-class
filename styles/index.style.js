@@ -3,7 +3,7 @@ import styled from "styled-components";
 const AdminContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: #888;
+  background-color: rgb(0, 0, 52);
   padding: 16px;
 
   .boxesContainer {

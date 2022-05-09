@@ -3,11 +3,24 @@ import { IoChatboxEllipses, IoSend } from "react-icons/io5";
 
 import { ChatBoxContainer } from "./chatBox.style";
 import { colors } from "../config";
+import { GoKebabVertical } from "react-icons/go";
+import { Dropdown } from "react-bootstrap";
 
 const ChatBox = (props) => {
   const { messages } = props;
   const [textMsg, setTextMsg] = useState("");
-
+  const Icon = React.forwardRef(({ children, onClick }, ref) => (
+    <a
+      href=""
+      ref={ref}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}
+    >
+      <GoKebabVertical style={{ position: "relative" }} />
+    </a>
+  ));
   const onType = (e) => {
     setTextMsg(e.target.value);
   };
@@ -40,7 +53,7 @@ const ChatBox = (props) => {
         <div className="inputBox">
           {!props.disableChat && (
             <div onClick={sendMsg} className="sendBtn">
-              <IoSend style={{ fontSize: 20 }} color="white" />
+              <IoSend style={{ fontSize: 20 }} color="#111" />
             </div>
           )}
           {!props.disableChat && (
@@ -67,7 +80,17 @@ const ChatBox = (props) => {
             var startTime = new Date(startTimeISOString);
             return (
               <div className="message" key={it.messageID}>
-                <div className="name">{it.fullName}</div>
+                <div className="name">
+                  {it.fullName}
+
+                  <Dropdown align="end">
+                    <Dropdown.Toggle align="end" as={Icon}></Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item bsPrefix="dropdownItem">حذف</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </div>
                 <div className="text">{it.text}</div>
                 <div className="time">
                   {startTime.getHours()}:{startTime.getMinutes()}

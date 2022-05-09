@@ -1,5 +1,5 @@
 export const colors = {
-  main: "#323232",
+  main: "rgb(60, 90, 130)",
   second: "#999",
   mainLight: "rgba(42, 90, 56, 0.2)",
 };

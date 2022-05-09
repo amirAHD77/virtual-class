@@ -23,7 +23,7 @@ export const ChatBoxContainer = styled.div`
 
   .chatBox {
     direction: rtl;
-    background-color: #5b5b5b;
+    background-color: rgb(226, 226, 226);
     height: 92%;
     border-radius: 4px;
     margin: 0;
@@ -67,7 +67,7 @@ export const ChatBoxContainer = styled.div`
     background-color: inherit;
     border: 0;
     padding-right: 8px;
-    color: #fff;
+    color: #111;
   }
 
   .input:focus {
@@ -93,17 +93,23 @@ export const ChatBoxContainer = styled.div`
   }
 
   .message {
-    background-color: #999;
     margin-bottom: 6px;
     border-radius: 12px;
     border-bottom-right-radius: 2px;
     padding: 6px 12px;
+    background-color: rgb(24, 44, 97);
     color: #eee;
   }
 
   .name {
     font-weight: bold;
     font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & > .dropdown > a > svg {
+      color: #fff;
+    }
   }
 
   .text {
@@ -124,5 +130,10 @@ export const ChatBoxContainer = styled.div`
     color: white;
     align-self: center;
     text-align: center;
+  }
+  .dropdownItem {
+    font-size: 12px;
+    text-decoration: none;
+    color: #fff;
   }
 `;

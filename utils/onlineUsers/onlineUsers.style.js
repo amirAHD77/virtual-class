@@ -24,7 +24,7 @@ export const OnlineUsersContainer = styled.div`
   .namesBox {
     direction: rtl;
     flex: 1;
-    background-color: #5b5b5b;
+    background-color: rgb(226, 226, 226);
     height: 92%;
     border-radius: 4px;
     padding: 16px;
@@ -48,12 +48,22 @@ export const OnlineUsersContainer = styled.div`
   }
 
   .name {
-    color: #fff;
+    color: #111;
     margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
   }
 
   .logo {
-    color: #fff;
+    color: #111;
     font-size: 17px;
+  }
+
+  .dropdownItem {
+    font-size: 12px;
+    text-decoration: none;
+    color: #fff;
   }
 `;

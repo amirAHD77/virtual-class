@@ -51,3 +51,10 @@ a {
   height: 100%;
   border: 0;
 }
+.dropdown-menu{
+  background-color: rgb(60, 90, 130) !important;
+  padding: 8px 16px !important;
+  border-radius: 6px !important;
+  min-width: unset !important;
+  transform: translate(-16px, 26px) !important
+}
