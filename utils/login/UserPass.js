@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
 import { useRouter } from "next/router";
 
-const UserPass = () => {
+const UserPass = (props) => {
   const [wrongPass, setWrongPass] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -91,21 +91,7 @@ const UserPass = () => {
               <div className="err">{errors.password}</div>
             )}
           </div>
-          {/* {mode === 2 ||
-            (mode === 3 && (
-              <>
-                <div className="w-100">
-                  <Field
-                    className="input"
-                    name="mob_number"
-                    placeholder="شماره موبایب"
-                  />
-                  {errors.mob_number && touched.mob_number && (
-                    <div className="err">{errors.mob_number}</div>
-                  )}
-                </div>
-              </>
-            ))} */}
+
           <label className="w-100 err">
             {wrongPass ? "نام کاربری یا رمز عبور صحیح نیست" : null}
             <button
@@ -115,6 +101,16 @@ const UserPass = () => {
             >
               ورود
             </button>
+          </label>
+          <label className="w-100 err">
+            {wrongPass ? "نام کاربری یا رمز عبور صحیح نیست" : null}
+            <div
+              // disabled={loading}
+              className="switchMode w-100"
+              onClick={() => props.setMode(2)}
+            >
+              ورود با شماره موبایل
+            </div>
           </label>
           <div
             onClick={() => window.open("tel:09010187117")}

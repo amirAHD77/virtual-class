@@ -13,7 +13,7 @@ import Public from "../../utils/login/Public";
 const Login = (props) => {
   const [test, setTest] = useState();
   const router = useRouter();
-  const mode = 1;
+  const [mode, setMode] = useState(1);
 
   return (
     <LoginContainer colors={colors}>
@@ -28,14 +28,20 @@ const Login = (props) => {
         <Container className="container" fluid>
           <div className="col-sm-12 col-md-10 orangeBox">
             <img className="img" src={pic.src} alt="لوگو" />
-            <p className="heading">انجمن آروان</p>
+            <p className="heading">غرب‌آنلاین کانکت</p>
             <p className="caption">
-              مکانی برای تبادل نظر درباره‌س محصولات و زیرساخت ابری
+              پلتفرم اختصاصی برگذاری کلاس و همایش های آنلاین
             </p>
           </div>
           <div className="d-none d-md-flex col-md-2 whiteBox">
             <div className={"boxContainer"}>
-              {mode === 1 ? <UserPass /> : mode === 2 ? <OTP /> : <Public />}
+              {mode === 1 ? (
+                <UserPass setMode={setMode} />
+              ) : mode === 2 ? (
+                <OTP setMode={setMode} />
+              ) : (
+                <Public />
+              )}
             </div>
           </div>
         </Container>

@@ -46,7 +46,7 @@ const LoginContainer = styled.div`
   }
   .boxContainer {
     background-color: #fff;
-    height: 80vh;
+    height: 85vh;
     position: absolute;
     /* border: 3px solid
       ${(props) => (props.colors.second ? props.colors.second : "black")}; */
@@ -61,6 +61,12 @@ const LoginContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    > div:nth-child(3) {
+      margin-top: -40px;
+    }
+    > label {
+      margin-top: -40px;
+    }
   }
 
   .header {
@@ -82,11 +88,13 @@ const LoginContainer = styled.div`
     text-align: right;
     border: 0;
     width: 100%;
-    background-color: #eee;
+    background-color: #efefef;
     border-radius: 14px;
     margin-top: 8px;
-    height: 45px;
+    height: 40px;
+    font-size: 12px;
 
+    ,
     &:hover {
       border: 1px solid #fe8f00;
     }
@@ -107,6 +115,7 @@ const LoginContainer = styled.div`
     font-size: 13px;
     font-weight: bold;
     text-align: right;
+    margin-top: 5px;
   }
 
   .button {
@@ -138,6 +147,17 @@ const LoginContainer = styled.div`
     /* margin-left: 5px; */
     padding: 12px;
     border-radius: 12px;
+  }
+
+  .switchMode {
+    background-color: inherit;
+    color: #aaa;
+    text-align: center;
+  }
+
+  .switchMode:hover {
+    color: lightblue;
+    cursor: pointer;
   }
 
   .supportText:hover {

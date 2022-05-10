@@ -3,7 +3,7 @@ import Axios from "../axios";
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
 
-const OTP = () => {
+const OTP = (props) => {
   const [wrongPass, setWrongPass] = useState(false);
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1);
@@ -99,6 +99,16 @@ const OTP = () => {
               ورود
             </button>
           </label>
+          <label className="w-100 err">
+            {/* {wrongPass ? "نام کاربری یا رمز عبور صحیح نیست" : null} */}
+            <div
+              // disabled={loading}
+              className="switchMode w-100"
+              onClick={() => props.setMode(1)}
+            >
+              ورود با نام کاربری و رمز عبور
+            </div>
+          </label>
           <div
             onClick={() => window.open("tel:09010187117")}
             className="supportText"
@@ -148,6 +158,7 @@ const OTP = () => {
               ورود
             </button>
           </label>
+
           <div
             onClick={() => window.open("tel:09010187117")}
             className="supportText"
