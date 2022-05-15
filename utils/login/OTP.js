@@ -68,7 +68,6 @@ const OTP = (props) => {
     >
       {({ errors, touched }) => (
         <Form className="form">
-          {console.log(errors, loading)}
           <div className="header">
             <img
               src="/images/inpoint connect logo PNG.png"
@@ -104,17 +103,11 @@ const OTP = (props) => {
             <div
               // disabled={loading}
               className="switchMode w-100"
-              onClick={() => props.setMode(1)}
+              onClick={() => props.setStudentUserPassMode(true)}
             >
               ورود با نام کاربری و رمز عبور
             </div>
           </label>
-          <div
-            onClick={() => window.open("tel:09010187117")}
-            className="supportText"
-          >
-            تماس با پشتیبانی : 09010187117
-          </div>
         </Form>
       )}
     </Formik>
@@ -126,7 +119,7 @@ const OTP = (props) => {
         console.log("values", values);
       }}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, values }) => (
         <Form className="form">
           <div className="header">
             <img
@@ -136,17 +129,20 @@ const OTP = (props) => {
             />
           </div>
 
-          <div className="w-100">
-            <Field
-              className="input"
-              type="number"
-              name="verifyCode"
-              placeholder="کد تایید"
-            />
-            {errors.verifyCode && touched.verifyCode && (
-              <div className="err">{errors.verifyCode}</div>
-            )}
-          </div>
+          {step !== 1 && (
+            <div className="w-100">
+              <Field
+                className="input"
+                type="number"
+                name="verifyCode"
+                autoComplete="off"
+                placeholder="کد تایید"
+              />
+              {errors.verifyCode && touched.verifyCode && (
+                <div className="err">{errors.verifyCode}</div>
+              )}
+            </div>
+          )}
 
           <label className="w-100 err">
             {/* {wrongPass ? "نام کاربری یا رمز عبور صحیح نیست" : null} */}
@@ -158,13 +154,6 @@ const OTP = (props) => {
               ورود
             </button>
           </label>
-
-          <div
-            onClick={() => window.open("tel:09010187117")}
-            className="supportText"
-          >
-            تماس با پشتیبانی : 09010187117
-          </div>
         </Form>
       )}
     </Formik>

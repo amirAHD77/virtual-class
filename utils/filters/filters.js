@@ -38,8 +38,12 @@ const Filters = (props) => {
       navigator.clipboard.writeText(props.classData?.class?.stream_key);
       window.alert("کلید RTMP کپی شد");
     } else if (num === "3") {
-      navigator.clipboard.writeText(window.location.href);
-      window.alert("لینک کلاس کپی شد");
+      navigator.clipboard.writeText(
+        window.location.origin +
+          "/login?forStudent=true&href=" +
+          window.location.href
+      );
+      // window.alert("لینک کلاس کپی شد");
     }
   };
 

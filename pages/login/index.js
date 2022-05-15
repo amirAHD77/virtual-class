@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
@@ -14,7 +14,12 @@ const Login = (props) => {
   const [test, setTest] = useState();
   const router = useRouter();
   const [mode, setMode] = useState(1);
-
+  const [forStudent, setForStudent] = useState();
+  const [studentUserPassMode, setStudentUserPassMode] = useState(false);
+  useLayoutEffect(() => {
+    if (!!forStudent !== !!router.query.forStudent)
+      setForStudent(!!router.query.forStudent);
+  }, [router.query]);
   return (
     <LoginContainer colors={colors}>
       <Row>
@@ -26,22 +31,30 @@ const Login = (props) => {
           />
         </Head>
         <Container className="container" fluid>
-          <div className="col-sm-12 col-md-10 orangeBox">
+          <div className="col-sm-12 col-md-10 orangeBox d-none d-md-block">
             <img className="img" src={pic.src} alt="لوگو" />
             <p className="heading">غرب‌آنلاین کانکت</p>
             <p className="caption">
               پلتفرم اختصاصی برگذاری کلاس و همایش های آنلاین
             </p>
           </div>
-          <div className="d-none d-md-flex col-md-2 whiteBox">
+          <div className="col-md-2 whiteBox">
             <div className={"boxContainer"}>
-              {mode === 1 ? (
-                <UserPass setMode={setMode} />
-              ) : mode === 2 ? (
-                <OTP setMode={setMode} />
+              {console.log(forStudent)}
+              {router.query.forStudent ? (
+                studentUserPassMode ? (
+                  <UserPass
+                    setStudentUserPassMode={setStudentUserPassMode}
+                    isStudent={forStudent}
+                  />
+                ) : (
+                  <OTP setStudentUserPassMode={setStudentUserPassMode} />
+                )
               ) : (
-                <Public />
+                <UserPass isStudent={forStudent} />
               )}
+
+              {/* <Public /> */}
             </div>
           </div>
         </Container>

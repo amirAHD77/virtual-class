@@ -23,18 +23,22 @@ const UserPass = (props) => {
         },
       });
       window.sessionStorage.setItem("role", res2.data.data.roles[0].name);
-      if (res2.data.data.roles[0].name === "TEACHER") {
+      console.log(props.forStudent, res2.data.data.roles[0].name === "TEACHER");
+      if (props.isStudent && res2.data.data.roles[0].name === "TEACHER") {
+        alert("شما مجاز به استفاده از این بخش نیستید");
+        return;
+      } else if (
+        !props.isStudent &&
+        res2.data.data.roles[0].name === "TEACHER"
+      ) {
         const res3 = await Axios.get("v1/class/teacher", {
           headers: {
             Authorization: `Bearer ${res.data.data.access_token}`,
           },
         });
         router.push(`/class/${res3.data.data[res3.data.data.length - 1].id}`);
-      } else if (
-        props.history[props.history.length - 2] &&
-        props.history[props.history.length - 2].includes("class/")
-      ) {
-        router.push(props.history[props.history.length - 2]);
+      } else if (router.query.forStudent && router.query.href) {
+        router.push(router.query.href);
       } else {
         alert("لطفا از طریق لینک کلاس وارد شوید");
         // router.push("/class");
@@ -103,21 +107,16 @@ const UserPass = (props) => {
             </button>
           </label>
           <label className="w-100 err">
-            {wrongPass ? "نام کاربری یا رمز عبور صحیح نیست" : null}
-            <div
-              // disabled={loading}
-              className="switchMode w-100"
-              onClick={() => props.setMode(2)}
-            >
-              ورود با شماره موبایل
-            </div>
+            {props.isStudent && (
+              <div
+                // disabled={loading}
+                className="switchMode w-100"
+                onClick={() => props.setStudentUserPassMode(false)}
+              >
+                ورود با شماره موبایل
+              </div>
+            )}
           </label>
-          <div
-            onClick={() => window.open("tel:09010187117")}
-            className="supportText"
-          >
-            تماس با پشتیبانی : 09010187117
-          </div>
         </Form>
       )}
     </Formik>

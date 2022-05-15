@@ -26,9 +26,11 @@ const LoginContainer = styled.div`
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
     text-align: center;
+    display: flex;
   }
   .whiteBox {
     align-items: center;
+    display: flex;
   }
   .img {
     max-height: 400px !important;
@@ -47,25 +49,31 @@ const LoginContainer = styled.div`
   .boxContainer {
     background-color: #fff;
     height: 85vh;
-    position: absolute;
+    /* position: absolute; */
     /* border: 3px solid
       ${(props) => (props.colors.second ? props.colors.second : "black")}; */
     border-radius: 18px;
     padding: 60px;
     width: 368px;
     margin-left: -184px;
+    @media (max-width: 460px) {
+      width: 100%;
+      height: 100%;
+      padding: 20px 45px;
+      margin: 0;
+    }
   }
 
   .form {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     > div:nth-child(3) {
-      margin-top: -40px;
+      margin-top: 10px;
     }
     > label {
-      margin-top: -40px;
+      /* margin-top: 10px; */
     }
   }
 
@@ -73,6 +81,9 @@ const LoginContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width: 460px) {
+      margin-bottom: 25px;
+    }
   }
 
   .label {
@@ -96,13 +107,13 @@ const LoginContainer = styled.div`
 
     ,
     &:hover {
-      border: 1px solid #fe8f00;
+      /* border: 1px solid #fe8f00; */
     }
     &:focus {
       box-shadow: 0px 0px 11px 5px rgba(0, 0, 0, 0.03);
 
       background-color: #fff;
-      border: 2px solid #fe8f00;
+      /* border: 2px solid #fe8f00; */
     }
   }
 
@@ -131,7 +142,7 @@ const LoginContainer = styled.div`
   }
   .button:hover {
     cursor: pointer;
-    background-color: #28773f;
+    background-color: #767676;
   }
 
   .supportText {
