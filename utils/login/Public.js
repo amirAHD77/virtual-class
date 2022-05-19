@@ -7,43 +7,7 @@ const Public = () => {
   const [wrongPass, setWrongPass] = useState(false);
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1);
-  const checkUser = async (val) => {
-    try {
-      setLoading(true);
-      const res = await Axios.post("v1/auth/login", {
-        user_name: val.user_name,
-        password: val.password,
-      });
-      window.sessionStorage.setItem("token", res.data.data.access_token);
-      window.sessionStorage.setItem("name", val.user_name);
-      const res2 = await Axios.get("v1/user", {
-        headers: {
-          Authorization: `Bearer ${res.data.data.access_token}`,
-        },
-      });
-      window.sessionStorage.setItem("role", res2.data.data.roles[0].name);
-      if (res2.data.data.roles[0].name === "TEACHER") {
-        const res3 = await Axios.get("v1/class/teacher", {
-          headers: {
-            Authorization: `Bearer ${res.data.data.access_token}`,
-          },
-        });
-        router.push(`/class/${res3.data.data[res3.data.data.length - 1].id}`);
-      } else if (
-        props.history[props.history.length - 2] &&
-        props.history[props.history.length - 2].includes("class/")
-      ) {
-        router.push(props.history[props.history.length - 2]);
-      } else {
-        alert("لطفا از طریق لینک کلاس وارد شوید");
-        // router.push("/class");
-      }
-    } catch (err) {
-      setWrongPass(true);
-      console.log("err", err);
-      setLoading(false);
-    }
-  };
+
   const FirstSchema = Yup.object().shape({
     mob_number: Yup.string()
       .min(11, "باید ۱۱ رقم باشد")
@@ -54,6 +18,7 @@ const Public = () => {
     firstName: Yup.string().required("فیلد اجباری"),
     lastName: Yup.string().required("فیلد اجباری"),
   });
+
   return step === 1 ? (
     <Formik
       initialValues={{ mob_number: "" }}
@@ -66,7 +31,6 @@ const Public = () => {
     >
       {({ errors, touched, values }) => (
         <Form className="form">
-          {console.log(errors, loading)}
           <div className="header">
             <img
               src="/images/inpoint connect logo PNG.png"

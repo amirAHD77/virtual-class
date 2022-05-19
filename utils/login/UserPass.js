@@ -23,7 +23,6 @@ const UserPass = (props) => {
         },
       });
       window.sessionStorage.setItem("role", res2.data.data.roles[0].name);
-      console.log(props.forStudent, res2.data.data.roles[0].name === "TEACHER");
       if (props.isStudent && res2.data.data.roles[0].name === "TEACHER") {
         alert("شما مجاز به استفاده از این بخش نیستید");
         return;
