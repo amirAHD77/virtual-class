@@ -40,9 +40,10 @@ const Login = (props) => {
           </div>
           <div className="col-md-2 whiteBox">
             <div className={"boxContainer"}>
-              {console.log(forStudent)}
               {router.query.forStudent ? (
-                studentUserPassMode ? (
+                router.query.type && router.query.type?.trim() === "PUBLIC" ? (
+                  <Public />
+                ) : studentUserPassMode ? (
                   <UserPass
                     setStudentUserPassMode={setStudentUserPassMode}
                     isStudent={forStudent}

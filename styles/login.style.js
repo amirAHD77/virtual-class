@@ -105,7 +105,6 @@ const LoginContainer = styled.div`
     height: 40px;
     font-size: 12px;
 
-    ,
     &:hover {
       /* border: 1px solid #fe8f00; */
     }
@@ -116,7 +115,30 @@ const LoginContainer = styled.div`
       /* border: 2px solid #fe8f00; */
     }
   }
+  .otpinput {
+    /* padding: 4px 8px; */
+    border-radius: 8px;
+    text-align: right;
+    border: 0;
+    width: 100%;
+    border-radius: 14px;
+    margin-top: 8px;
+    height: 40px;
+    font-size: 12px;
+    display: inline-flex;
+    justify-content: center;
 
+    & > input {
+      margin-right: 8px;
+      border-radius: 12px;
+      border: 1px solid #aaa;
+      width: 24px !important;
+      height: 40px;
+      &:last-child {
+        margin-right: 0 !important;
+      }
+    }
+  }
   .input:focus {
     outline: none;
   }

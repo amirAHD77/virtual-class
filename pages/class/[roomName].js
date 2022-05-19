@@ -127,7 +127,7 @@ const Admin = () => {
       setClassData(res.data.data);
     } else if (role.current === "STUDENT" && sessionStorage.getItem("token")) {
       const res = await Axios.get(
-        `v1/class/student/public/${Router?.query?.roomName}`,
+        `v1/class/student/private/${Router?.query?.roomName}`,
         {
           headers: {
             Authorization: `Bearer ${tokenAvailability}`,

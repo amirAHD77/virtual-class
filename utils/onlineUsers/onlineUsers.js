@@ -5,8 +5,13 @@ import { OnlineUsersContainer } from "./onlineUsers.style";
 import { colors } from "../config";
 import { GoKebabVertical } from "react-icons/go";
 import { Dropdown } from "react-bootstrap";
+import Axios from "../axios";
 
 const OnlineUsers = (props) => {
+  console.log("props", props);
+  const kickUser = async () => {
+    const res = Axios.post("v1/class/kick", {});
+  };
   const Icon = React.forwardRef(({ children, onClick }, ref) => (
     <a
       href=""

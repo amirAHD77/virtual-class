@@ -40,7 +40,9 @@ const Filters = (props) => {
     } else if (num === "3") {
       navigator.clipboard.writeText(
         window.location.origin +
-          "/login?forStudent=true&href=" +
+          "/login?forStudent=true&type=" +
+          props.classData?.class?.class?.login_type +
+          " &href=" +
           window.location.href
       );
       // window.alert("لینک کلاس کپی شد");

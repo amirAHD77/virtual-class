@@ -2,46 +2,57 @@ import React, { useState } from "react";
 import Axios from "../axios";
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
+import OtpInput from "react-otp-input";
+import { useRouter } from "next/router";
 
 const OTP = (props) => {
   const [wrongPass, setWrongPass] = useState(false);
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1);
-  const checkUser = async (val) => {
+  const [phone, setPhone] = useState();
+  const router = useRouter();
+  const stepOneHandler = async (val) => {
     try {
       setLoading(true);
-      const res = await Axios.post("v1/auth/login", {
-        user_name: val.user_name,
-        password: val.password,
+
+      const res = await Axios.post("v1/auth/otp/step1", {
+        phone_number: val.mob_number,
       });
-      window.sessionStorage.setItem("token", res.data.data.access_token);
-      window.sessionStorage.setItem("name", val.user_name);
+      setPhone(val.mob_number);
+      setStep(2);
+      setLoading(false);
+    } catch (err) {
+      // setWrongPass(true);
+      // console.log("err", err);
+      setLoading(false);
+    }
+  };
+  const stepTwoHandler = async (values) => {
+    try {
+      const res = await Axios.post("/v1/auth/otp/step2", {
+        phone_number: phone,
+        code: values.verifyCode,
+      });
       const res2 = await Axios.get("v1/user", {
         headers: {
           Authorization: `Bearer ${res.data.data.access_token}`,
         },
       });
+      window.sessionStorage.setItem("token", res.data.data.access_token);
+      window.sessionStorage.setItem("name", res2.data.data.user_name);
       window.sessionStorage.setItem("role", res2.data.data.roles[0].name);
       if (res2.data.data.roles[0].name === "TEACHER") {
-        const res3 = await Axios.get("v1/class/teacher", {
-          headers: {
-            Authorization: `Bearer ${res.data.data.access_token}`,
-          },
-        });
-        router.push(`/class/${res3.data.data[res3.data.data.length - 1].id}`);
-      } else if (
-        props.history[props.history.length - 2] &&
-        props.history[props.history.length - 2].includes("class/")
-      ) {
-        router.push(props.history[props.history.length - 2]);
+        alert("شما مجاز به استفاده از این بخش نیستید");
+        return;
+      } else if (router.query.forStudent && router.query.href) {
+        router.push(router.query.href);
       } else {
         alert("لطفا از طریق لینک کلاس وارد شوید");
         // router.push("/class");
       }
     } catch (err) {
+      console.error(err);
       setWrongPass(true);
-      console.log("err", err);
-      setLoading(false);
     }
   };
   const FirstSchema = Yup.object().shape({
@@ -61,9 +72,7 @@ const OTP = (props) => {
       initialValues={{ mob_number: "" }}
       validationSchema={FirstSchema}
       onSubmit={(values) => {
-        console.log("values", values);
-        // checkUser(values);
-        setStep(2);
+        stepOneHandler(values);
       }}
     >
       {({ errors, touched }) => (
@@ -117,9 +126,10 @@ const OTP = (props) => {
       validationSchema={SecondSchema}
       onSubmit={(values) => {
         console.log("values", values);
+        stepTwoHandler(values);
       }}
     >
-      {({ errors, touched, values }) => (
+      {({ errors, touched, values, setFieldValue }) => (
         <Form className="form">
           <div className="header">
             <img
@@ -131,12 +141,17 @@ const OTP = (props) => {
 
           {step !== 1 && (
             <div className="w-100">
-              <Field
-                className="input"
+              {/* <Field
                 type="number"
                 name="verifyCode"
                 autoComplete="off"
                 placeholder="کد تایید"
+              /> */}
+              <OtpInput
+                value={values.verifyCode}
+                className="otpinput"
+                onChange={(val) => setFieldValue("verifyCode", val)}
+                numInputs={6}
               />
               {errors.verifyCode && touched.verifyCode && (
                 <div className="err">{errors.verifyCode}</div>
@@ -145,7 +160,7 @@ const OTP = (props) => {
           )}
 
           <label className="w-100 err">
-            {/* {wrongPass ? "نام کاربری یا رمز عبور صحیح نیست" : null} */}
+            {wrongPass ? "کد وارد شده صحیح نیست" : null}
             <button
               // disabled={loading}
               className="button w-100"
@@ -154,6 +169,18 @@ const OTP = (props) => {
               ورود
             </button>
           </label>
+          <span
+            style={{
+              fontSize: 12,
+              textAlign: "right",
+              marginTop: 8,
+              marginRight: 4,
+              cursor: "pointer",
+            }}
+            onClick={() => setStep(1)}
+          >
+            ویرایش شماره
+          </span>
         </Form>
       )}
     </Formik>
