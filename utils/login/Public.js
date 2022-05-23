@@ -122,12 +122,6 @@ const Public = () => {
               ورود
             </button>
           </label>
-          <div
-            onClick={() => window.open("tel:09010187117")}
-            className="supportText"
-          >
-            تماس با پشتیبانی : 09010187117
-          </div>
         </Form>
       )}
     </Formik>

@@ -8,9 +8,15 @@ import { Dropdown } from "react-bootstrap";
 import Axios from "../axios";
 
 const OnlineUsers = (props) => {
-  console.log("props", props);
-  const kickUser = async () => {
-    const res = Axios.post("v1/class/kick", {});
+  const kickUser = async (id) => {
+    try {
+      const res = Axios.post("v1/class/kick", {
+        class_id: props.classData?.class?.class?.id,
+        student_id: id,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
   const Icon = React.forwardRef(({ children, onClick }, ref) => (
     <a
@@ -45,12 +51,17 @@ const OnlineUsers = (props) => {
             </div>
             <div className="name">
               {it?.fullName?.length ? it.fullName : null}
-              {it.type == "TEACHER" && (
+              {it.type !== "TEACHER" && (
                 <Dropdown align="end">
                   <Dropdown.Toggle align="end" as={Icon}></Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item bsPrefix="dropdownItem">اخراج</Dropdown.Item>
+                    <Dropdown.Item
+                      onClick={() => kickUser(it.id)}
+                      bsPrefix="dropdownItem"
+                    >
+                      اخراج
+                    </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               )}

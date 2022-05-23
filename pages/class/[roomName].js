@@ -115,26 +115,33 @@ const Admin = () => {
       return;
     }
     const tokenAvailability = sessionStorage.getItem("token");
-    if (role.current === "TEACHER" && sessionStorage.getItem("token")) {
-      const res = await Axios.get(
-        `v1/class/teacher/${Router?.query?.roomName}`,
-        {
-          headers: {
-            Authorization: `Bearer ${tokenAvailability}`,
-          },
-        }
-      );
-      setClassData(res.data.data);
-    } else if (role.current === "STUDENT" && sessionStorage.getItem("token")) {
-      const res = await Axios.get(
-        `v1/class/student/private/${Router?.query?.roomName}`,
-        {
-          headers: {
-            Authorization: `Bearer ${tokenAvailability}`,
-          },
-        }
-      );
-      setClassData({ class: res.data.data });
+    try {
+      if (role.current === "TEACHER" && sessionStorage.getItem("token")) {
+        const res = await Axios.get(
+          `v1/class/teacher/${Router?.query?.roomName}`,
+          {
+            headers: {
+              Authorization: `Bearer ${tokenAvailability}`,
+            },
+          }
+        );
+        setClassData(res.data.data);
+      } else if (
+        role.current === "STUDENT" &&
+        sessionStorage.getItem("token")
+      ) {
+        const res = await Axios.get(
+          `v1/class/student/private/${Router?.query?.roomName}`,
+          {
+            headers: {
+              Authorization: `Bearer ${tokenAvailability}`,
+            },
+          }
+        );
+        setClassData({ class: res.data.data });
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -153,6 +160,17 @@ const Admin = () => {
         text: text,
         room: classData?.class?.class?.name,
         type: role.current,
+      },
+      function (response) {
+        console.log(123, response); // ok
+      }
+    );
+  };
+  const deleteMessage = async (id) => {
+    socket.current.emit(
+      "deleteMessage",
+      {
+        id: id,
       },
       function (response) {
         console.log(123, response); // ok
@@ -178,7 +196,7 @@ const Admin = () => {
         </div>
         <div className="rightSide col-12 col-md-3">
           <div className="onlineUsersBox ">
-            <OnlineUsers users={users} />
+            <OnlineUsers classData={classData} users={users} />
           </div>
           <div className="chatBox ">
             <ChatBox

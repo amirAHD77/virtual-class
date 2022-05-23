@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Form } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 
 import { FiltersContainer } from "./filters.style";
 import Axios from "../axios";
+import { useRouter } from "next/router";
 
 const Filters = (props) => {
   const [links, setLinks] = useState({ link1: "", link2: "", link3: "" });
   const [enablePv, setEnablePv] = useState(false);
   const [disableChat, setDisableChat] = useState(false);
-
+  const Router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
   const pvHandler = () => {
     props.socket.emit("privateChat", {
       room: props.classData.class?.class?.name,
@@ -23,7 +25,25 @@ const Filters = (props) => {
     });
     setDisableChat(!disableChat);
   };
-
+  const endClass = async () => {
+    try {
+      const res = await Axios.get(
+        `v1/class/start-end`,
+        {
+          class_id: props.classData?.class?.class?.id,
+          state: false,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${tokenAvailability}`,
+          },
+        }
+      );
+      Router.reload();
+    } catch (err) {
+      console.error(err);
+    }
+  };
   const getLinks = async () => {};
 
   useEffect(() => {
@@ -51,6 +71,21 @@ const Filters = (props) => {
 
   return (
     <FiltersContainer className="row">
+      <Modal
+        dialogClassName="modal2"
+        show={isOpen}
+        onHide={() => setIsOpen(false)}
+      >
+        <Button variant="primary" onClick={() => copy("1")} className="link">
+          RTMP لینک
+        </Button>
+        <Button variant="secondary" onClick={() => copy("2")} className="link">
+          RTMP کلید
+        </Button>
+        <Button variant="warning" onClick={() => copy("3")} className="link">
+          لینک کلاس
+        </Button>
+      </Modal>
       <div className="switchContainer col-12 col-md-4">
         <Form.Check
           className="switch"
@@ -74,15 +109,10 @@ const Filters = (props) => {
         <div className="label">غیر فعال سازی چت</div>
       </div>
       <div className="links col-12 col-md-5">
-        <div onClick={() => copy("1")} className="link">
-          RTMP لینک
-        </div>
-        <div onClick={() => copy("2")} className="link">
-          RTMP کلید
-        </div>
-        <div onClick={() => copy("3")} className="link">
-          لینک کلاس
-        </div>
+        <Button variant="danger" onClick={() => endClass()}>
+          اتمام کلاس
+        </Button>
+        <Button onClick={() => setIsOpen(true)}>تنضیمات</Button>
       </div>
     </FiltersContainer>
   );

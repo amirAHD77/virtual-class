@@ -31,6 +31,9 @@ const ChatBox = (props) => {
       props.sendMessage(textMsg);
     }
   };
+  const deleteMsg = (id) => {
+    props.deleteMessage(id);
+  };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -87,7 +90,12 @@ const ChatBox = (props) => {
                     <Dropdown.Toggle align="end" as={Icon}></Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                      <Dropdown.Item bsPrefix="dropdownItem">حذف</Dropdown.Item>
+                      <Dropdown.Item
+                        onClick={() => deleteMsg(it.messageId)}
+                        bsPrefix="dropdownItem"
+                      >
+                        حذف
+                      </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                 </div>

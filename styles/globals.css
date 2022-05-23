@@ -58,3 +58,14 @@ a {
   min-width: unset !important;
   transform: translate(-16px, 26px) !important
 }
+.modal2>div{
+  padding: 40px;
+  display:flex;
+  justify-content: space-between;
+  flex-direction: row;
+
+}
+.modal2>div>div{
+  display: inline-flex;
+  
+}
