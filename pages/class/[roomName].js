@@ -70,31 +70,41 @@ const Admin = () => {
     socket.current.on("privateChat", (data) => {
       console.log(data);
     });
-
+    socket.current.on("isDuplicateUser", (data) => {
+      console.log("duplicate", data);
+    });
+    socket.current.on("isKicked", (data) => {
+      console.log("kicked", data);
+    });
     socket.current.on("message", (data) => {
-      console.log("data1", data);
-      if (data.type === "MESSAGE") {
+      if (data?.type === "MESSAGE") {
         setMessages((prevState) => [data, ...prevState]);
       } else if (
-        data.type === "NOTIFICATION" &&
+        data?.type === "NOTIFICATION" &&
         data.text === "چت غیر فعال شد"
       ) {
         setDisableChat(true);
-      } else if (data.type === "NOTIFICATION" && data.text === "چت فعال شد") {
+      } else if (data?.type === "NOTIFICATION" && data.text === "چت فعال شد") {
         setDisableChat(false);
       } else if (
-        data.type === "NOTIFICATION" &&
-        data.text === "پیام خصوصی فعال شد"
+        data?.type === "NOTIFICATION" &&
+        data?.text === "پیام خصوصی فعال شد"
       ) {
         setPrivateChat(true);
       } else if (
-        data.type === "NOTIFICATION" &&
-        data.text === "پیام خصوصی غیر فعال شد"
+        data?.type === "NOTIFICATION" &&
+        data?.text === "پیام خصوصی غیر فعال شد"
       ) {
         setPrivateChat(false);
+      } else {
+        if (!data?.type && data?.length > -1) setMessages(data);
+        console.log(3434, data);
       }
     });
-
+    socket.current.on("pmessage", (data) => {
+      console.log("messages", data);
+      setMessages(data);
+    });
     return () => {
       console.log("websocket unmounting!!!!!");
       socket.current.off();
@@ -144,20 +154,16 @@ const Admin = () => {
       console.log(err);
     }
   };
-  console.log(123123, classData);
   const joinRoom = () => {
-    console.log({
-      fullName: name.current,
-      room: classData?.class?.class?.name,
-      type: role.current,
-    });
+    const userId = sessionStorage.getItem("userId");
+
     socket.current.emit("joinRoom", {
       fullName: name.current,
       room: classData?.class?.class?.name,
       type: role.current,
+      uuid: userId,
     });
   };
-
   const sendMessage = async (text) => {
     socket.current.emit(
       "chatMessage",
@@ -172,10 +178,26 @@ const Admin = () => {
     );
   };
   const deleteMessage = async (id) => {
+    console.log(id);
     socket.current.emit(
       "deleteMessage",
       {
-        id: id,
+        messageId: id,
+        room: classData.class?.class?.name,
+      },
+      function (response) {
+        console.log(123, response); // ok
+      }
+    );
+  };
+
+  const kickUser = async (id, socketId) => {
+    socket.current.emit(
+      "kickUser",
+      {
+        uuid: id,
+        socketId: socketId,
+        room: classData.class?.class?.name,
       },
       function (response) {
         console.log(123, response); // ok
@@ -201,7 +223,12 @@ const Admin = () => {
         </div>
         <div className="rightSide col-12 col-md-3">
           <div className="onlineUsersBox ">
-            <OnlineUsers classData={classData} users={users} />
+            <OnlineUsers
+              role={role.current}
+              classData={classData}
+              users={users}
+              kickUser={kickUser}
+            />
           </div>
           <div className="chatBox ">
             <ChatBox
@@ -209,6 +236,7 @@ const Admin = () => {
               messages={messages}
               disableChat={disableChat}
               privateChat={privateChat}
+              deleteMessage={deleteMessage}
             />
           </div>
         </div>

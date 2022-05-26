@@ -8,16 +8,6 @@ import { Dropdown } from "react-bootstrap";
 import Axios from "../axios";
 
 const OnlineUsers = (props) => {
-  const kickUser = async (id) => {
-    try {
-      const res = Axios.post("v1/class/kick", {
-        class_id: props.classData?.class?.class?.id,
-        student_id: id,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
   const Icon = React.forwardRef(({ children, onClick }, ref) => (
     <a
       href=""
@@ -38,26 +28,25 @@ const OnlineUsers = (props) => {
         </div>
         <div className="headerTitle">کاربران ({props.users.length})</div>
       </div>
+      {console.log(props.users)}
       <div className="namesBox">
         {props.users.map((it, index) => (
           <div className="nameContainer" key={index}>
             <div
               className="logo"
-              style={
-                it.type === "TEACHER" ? { color: "rgb(24, 44, 97)" } : null
-              }
+              style={it.type === "TEACHER" ? { color: "#ffa500" } : null}
             >
               <IoPerson />
             </div>
             <div className="name">
               {it?.fullName?.length ? it.fullName : null}
-              {it.type !== "TEACHER" && (
+              {props.role === "TEACHER" && it.type !== "TEACHER" && (
                 <Dropdown align="end">
                   <Dropdown.Toggle align="end" as={Icon}></Dropdown.Toggle>
 
                   <Dropdown.Menu>
                     <Dropdown.Item
-                      onClick={() => kickUser(it.id)}
+                      onClick={() => props.kickUser(it.uuid, it.id)}
                       bsPrefix="dropdownItem"
                     >
                       اخراج
