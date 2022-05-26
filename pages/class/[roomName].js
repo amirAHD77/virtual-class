@@ -72,9 +72,17 @@ const Admin = () => {
     });
     socket.current.on("isDuplicateUser", (data) => {
       console.log("duplicate", data);
+      if (data === true) {
+        window.alert("شما قبلا وارد شده اید");
+        router.push("/login");
+      }
     });
     socket.current.on("isKicked", (data) => {
       console.log("kicked", data);
+      if (data === true) {
+        window.alert("شما از کلاس اخراج شدید");
+        router.push("/login");
+      }
     });
     socket.current.on("message", (data) => {
       if (data?.type === "MESSAGE") {
@@ -124,6 +132,7 @@ const Admin = () => {
       Router.push("/login");
       return;
     }
+    console.log(router.query);
     const tokenAvailability = sessionStorage.getItem("token");
     try {
       if (role.current === "TEACHER" && sessionStorage.getItem("token")) {
@@ -138,10 +147,26 @@ const Admin = () => {
         setClassData(res.data.data);
       } else if (
         role.current === "STUDENT" &&
-        sessionStorage.getItem("token")
+        sessionStorage.getItem("token") &&
+        !router.query.firstName
       ) {
         const res = await Axios.get(
           `v1/class/student/private/${Router?.query?.roomName}`,
+          {
+            headers: {
+              Authorization: `Bearer ${tokenAvailability}`,
+            },
+          }
+        );
+        setClassData({ class: res.data.data });
+      } else if (router.query.firstName) {
+        const res = await Axios.post(
+          `v1/class/student/public/${Router?.query?.roomName}`,
+          {
+            first_name: router.query.firstName,
+            last_name: router.query.lastName,
+            phone_number: router.query.phoneNumber,
+          },
           {
             headers: {
               Authorization: `Bearer ${tokenAvailability}`,
