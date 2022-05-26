@@ -11,6 +11,7 @@ const Filters = (props) => {
   const [disableChat, setDisableChat] = useState(false);
   const Router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [status, setStatus] = useState(true);
   const pvHandler = () => {
     props.socket.emit("privateChat", {
       room: props.classData.class?.class?.name,
@@ -26,22 +27,12 @@ const Filters = (props) => {
     setDisableChat(!disableChat);
   };
   const endClass = async () => {
-    try {
-      const res = await Axios.get(
-        `v1/class/start-end`,
-        {
-          class_id: props.classData?.class?.class?.id,
-          state: false,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${tokenAvailability}`,
-          },
-        }
-      );
-      Router.reload();
-    } catch (err) {
-      console.error(err);
+    if (status) {
+      props.startStop(false);
+      setStatus(false);
+    } else {
+      props.startStop(true);
+      setStatus(true);
     }
   };
   const getLinks = async () => {};
@@ -111,8 +102,11 @@ const Filters = (props) => {
         <div className="label">غیر فعال سازی چت</div>
       </div>
       <div className="links col-12 col-md-5">
-        <Button variant="danger" onClick={() => endClass()}>
-          اتمام کلاس
+        <Button
+          variant={status ? "danger" : "success"}
+          onClick={() => endClass()}
+        >
+          {status ? " اتمام کلاس" : "شروع کلاس"}
         </Button>
         <Button onClick={() => setIsOpen(true)}>تنضیمات</Button>
       </div>
