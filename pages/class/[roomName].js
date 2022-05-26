@@ -113,6 +113,10 @@ const Admin = () => {
       console.log("messages", data);
       setMessages(data);
     });
+
+    socket.current.on("startStop", function (response) {
+      console.log("startStop", response); // ok
+    });
     return () => {
       console.log("websocket unmounting!!!!!");
       socket.current.off();
@@ -229,6 +233,21 @@ const Admin = () => {
       }
     );
   };
+
+  const startStop = async (status) => {
+    console.log("status", status);
+    socket.current.emit(
+      "startStop",
+      {
+        status: status,
+        room: classData.class?.class?.name,
+      },
+      function (response) {
+        console.log("startStop", response); // ok
+      }
+    );
+  };
+
   return (
     <AdminContainer role={role.current} colors={colors}>
       <Head>
@@ -239,7 +258,11 @@ const Admin = () => {
         <div className="leftSide col-12 col-md-9">
           {role.current === "TEACHER" && (
             <div className="filtersBox">
-              <Filters socket={socket.current} classData={classData} />
+              <Filters
+                startStop={startStop}
+                socket={socket.current}
+                classData={classData}
+              />
             </div>
           )}
           <div className="stream">
