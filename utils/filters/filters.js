@@ -65,7 +65,9 @@ const Filters = (props) => {
           " &href=" +
           window.location.href
       );
-      // window.alert("لینک کلاس کپی شد");
+      setTimeout(() => {
+        window.alert("لینک کلاس کپی شد");
+      }, 400);
     }
   };
 

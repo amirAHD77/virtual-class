@@ -144,8 +144,13 @@ const Admin = () => {
       console.log(err);
     }
   };
-
+  console.log(123123, classData);
   const joinRoom = () => {
+    console.log({
+      fullName: name.current,
+      room: classData?.class?.class?.name,
+      type: role.current,
+    });
     socket.current.emit("joinRoom", {
       fullName: name.current,
       room: classData?.class?.class?.name,
