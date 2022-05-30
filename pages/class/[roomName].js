@@ -34,11 +34,21 @@ const Admin = () => {
       );
       name.current = sessionStorage?.getItem("name")
         ? sessionStorage.getItem("name")
+        : router.query.firstName
+        ? router.query?.firstName + " " + router.query?.lastName
         : null;
       role.current = sessionStorage?.getItem("role")
         ? sessionStorage.getItem("role")
         : "STUDENT";
-      if (!sessionStorage.getItem("token") || !sessionStorage.getItem("name")) {
+      console.log(
+        router.query.firstName,
+        !sessionStorage.getItem("token"),
+        !sessionStorage.getItem("name")
+      );
+      if (
+        !router.query.firstName &&
+        (!sessionStorage.getItem("token") || !sessionStorage.getItem("name"))
+      ) {
         Router.push("/login");
       }
     }
@@ -133,6 +143,7 @@ const Admin = () => {
 
   const getClassData = async () => {
     if (!Router.query.roomName) {
+      console.log(11111111);
       Router.push("/login");
       return;
     }
