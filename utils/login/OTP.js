@@ -114,7 +114,7 @@ const OTP = (props) => {
               className="switchMode w-100"
               onClick={() => props.setStudentUserPassMode(true)}
             >
-              ورود با نام کاربری و رمز عبور
+              ورود با رمز عبور ثابت
             </div>
           </label>
         </Form>

@@ -103,12 +103,18 @@ const Filters = (props) => {
       </div>
       <div className="links col-12 col-md-5">
         <Button
-          variant={status ? "danger" : "success"}
+          style={{ backgroundColor: status ? "red" : "#0063b1" }}
+          // variant={status ? "danger" : "success"}
           onClick={() => endClass()}
         >
           {status ? " اتمام کلاس" : "شروع کلاس"}
         </Button>
-        <Button onClick={() => setIsOpen(true)}>تنضیمات</Button>
+        <Button
+          style={{ backgroundColor: "#e2e2e2", color: "#000" }}
+          onClick={() => setIsOpen(true)}
+        >
+          تنظیمات
+        </Button>
       </div>
     </FiltersContainer>
   );

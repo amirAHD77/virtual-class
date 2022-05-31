@@ -262,7 +262,7 @@ const Admin = () => {
   return (
     <AdminContainer role={role.current} colors={colors}>
       <Head>
-        <title>این‌پوینت کانکت</title>
+        <title>غرب‌آنلاین کانکت-رویداد</title>
         <link rel="shortcut icon" href="/images/inpoint connect logo PNG.png" />
       </Head>
       <div className="boxesContainer row">
