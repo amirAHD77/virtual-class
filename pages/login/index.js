@@ -37,7 +37,14 @@ const Login = (props) => {
             <p className="caption">
               پلتفرم اختصاصی برگزاری کلاس و همایش های آنلاین
             </p>
-            <p style={{ marginTop: "210px", color: "#ccc" }}>
+            <p
+              style={{
+                position: "absolute",
+                width: "100%",
+                bottom: "10px",
+                color: "#ccc",
+              }}
+            >
               کلیه حقوق مادی و معنوی پلتفرم متعلق به آموزشگاه غرب‌آنلاین می باشد
             </p>
           </div>

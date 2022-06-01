@@ -84,14 +84,26 @@ const Admin = () => {
       console.log("duplicate", data);
       if (data === true) {
         window.alert("شما قبلا وارد شده اید");
-        router.push("/login");
+        router.push(
+          window.location.origin +
+            "/login?forStudent=true&type=" +
+            classData?.class?.class?.login_type +
+            " &href=" +
+            window.location.href
+        );
       }
     });
     socket.current.on("isKicked", (data) => {
       console.log("kicked", data);
       if (data === true) {
         window.alert("شما از کلاس اخراج شدید");
-        router.push("/login");
+        router.push(
+          window.location.origin +
+            "/login?forStudent=true&type=" +
+            classData?.class?.class?.login_type +
+            " &href=" +
+            window.location.href
+        );
       }
     });
     socket.current.on("message", (data) => {

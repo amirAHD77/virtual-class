@@ -27,10 +27,13 @@ const LoginContainer = styled.div`
     border-top-left-radius: 0;
     text-align: center;
     display: flex;
+    position: relative;
+    z-index: 1;
   }
   .whiteBox {
     align-items: center;
     display: flex;
+    z-index: 2;
   }
   .img {
     max-height: 400px !important;
