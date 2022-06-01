@@ -24,7 +24,7 @@ const Login = (props) => {
     <LoginContainer colors={colors}>
       <Row>
         <Head>
-          <title>این‌پوینت کانکت</title>
+          <title>غرب‌آنلاین کانکت-ورود</title>
           <link
             rel="shortcut icon"
             href="/images/inpoint connect logo PNG.png"
@@ -35,7 +35,10 @@ const Login = (props) => {
             <img className="img" src={pic.src} alt="لوگو" />
             <p className="heading">غرب‌آنلاین کانکت</p>
             <p className="caption">
-              پلتفرم اختصاصی برگذاری کلاس و همایش های آنلاین
+              پلتفرم اختصاصی برگزاری کلاس و همایش های آنلاین
+            </p>
+            <p style={{ marginTop: "210px", color: "#ccc" }}>
+              کلیه حقوق مادی و معنوی پلتفرم متعلق به آموزشگاه غرب‌آنلاین می باشد
             </p>
           </div>
           <div className="col-md-2 whiteBox">
