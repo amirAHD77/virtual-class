@@ -86,18 +86,20 @@ const ChatBox = (props) => {
                 <div className="name">
                   {it.fullName}
 
-                  <Dropdown align="end">
-                    <Dropdown.Toggle align="end" as={Icon}></Dropdown.Toggle>
+                  {props.role === "TEACHER" && (
+                    <Dropdown align="end">
+                      <Dropdown.Toggle align="end" as={Icon}></Dropdown.Toggle>
 
-                    <Dropdown.Menu>
-                      <Dropdown.Item
-                        onClick={() => deleteMsg(it.messageId)}
-                        bsPrefix="dropdownItem"
-                      >
-                        حذف
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
+                      <Dropdown.Menu>
+                        <Dropdown.Item
+                          onClick={() => deleteMsg(it.messageId)}
+                          bsPrefix="dropdownItem"
+                        >
+                          حذف
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  )}
                 </div>
                 <div className="text">{it.text}</div>
                 <div className="time">

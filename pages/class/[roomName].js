@@ -295,6 +295,7 @@ const Admin = () => {
               messages={messages}
               disableChat={disableChat}
               privateChat={privateChat}
+              role={role.current}
               deleteMessage={deleteMessage}
             />
           </div>
