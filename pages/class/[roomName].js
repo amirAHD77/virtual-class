@@ -293,15 +293,20 @@ const Admin = () => {
           </div>
         </div>
         <div className="rightSide col-12 col-md-3">
-          <div className="onlineUsersBox ">
-            <OnlineUsers
-              role={role.current}
-              classData={classData}
-              users={users}
-              kickUser={kickUser}
-            />
-          </div>
-          <div className="chatBox ">
+          {role.current === "TEACHER" && (
+            <div className="onlineUsersBox ">
+              <OnlineUsers
+                role={role.current}
+                classData={classData}
+                users={users}
+                kickUser={kickUser}
+              />
+            </div>
+          )}
+          <div
+            className="chatBox "
+            style={role.current !== "TEACHER" ? { height: "100%" } : {}}
+          >
             <ChatBox
               sendMessage={sendMessage}
               messages={messages}

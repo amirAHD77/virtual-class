@@ -103,7 +103,7 @@ const Filters = (props) => {
       </div>
       <div className="links col-12 col-md-5">
         <Button
-          style={{ backgroundColor: status ? "red" : "#0063b1" }}
+          style={{ backgroundColor: status ? "#2e496e" : "#0063b1" }}
           // variant={status ? "danger" : "success"}
           onClick={() => endClass()}
         >
