@@ -305,7 +305,7 @@ const Admin = () => {
           )}
           <div
             className="chatBox "
-            style={role.current !== "TEACHER" ? { height: "100%" } : {}}
+            style={role.current !== "TEACHER" ? { height: "98%" } : {}}
           >
             <ChatBox
               sendMessage={sendMessage}
