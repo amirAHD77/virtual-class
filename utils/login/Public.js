@@ -15,6 +15,7 @@ const Public = () => {
     phoneNumber: Yup.string().required("فیلد اجباری"),
   });
   const submit = (val) => {
+    window.sessionStorage.setItem("name", val.firstName + " " + val.lastName);
     router.push(
       router.query.href +
         `?firstName=${val.firstName}&lastName=${val.lastName}&phoneNumber=${val.phoneNumber}`

@@ -39,7 +39,10 @@ const OTP = (props) => {
         },
       });
       window.sessionStorage.setItem("token", res.data.data.access_token);
-      window.sessionStorage.setItem("name", res2.data.data.user_name);
+      window.sessionStorage.setItem(
+        "name",
+        res2.data.data.first_name + " " + res2.data.data.last_name
+      );
       window.sessionStorage.setItem("role", res2.data.data.roles[0].name);
       if (res2.data.data.roles[0].name === "TEACHER") {
         alert("شما مجاز به استفاده از این بخش نیستید");
