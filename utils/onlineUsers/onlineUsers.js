@@ -28,11 +28,9 @@ const OnlineUsers = (props) => {
         </div>
         <div className="headerTitle">کاربران ({props.users.length})</div>
       </div>
-      {console.log(props.users)}
       <div className="namesBox">
         {props.users.map((it, index) => (
           <div className="nameContainer" key={index}>
-            {console.log("it", it)}
             <div
               className="logo"
               style={it.type === "TEACHER" ? { color: "#ffa500" } : null}

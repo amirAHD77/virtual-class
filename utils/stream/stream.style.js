@@ -51,7 +51,7 @@ export const StreamContainer = styled.div`
     padding-top: 55.25%;
   }
 
-  .r1_iframe_embed iframe {
+  .r1_iframe_embed video {
     position: absolute;
     top: 0;
     left: 0;
@@ -59,7 +59,7 @@ export const StreamContainer = styled.div`
     height: 100%;
     border: 0;
   }
-  iframe {
+  video {
     width: 100%;
     height: 100%;
     max-height: 100% !important;

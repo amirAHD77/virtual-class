@@ -5,7 +5,11 @@ const AdminContainer = styled.div`
   height: 100vh;
   background-color: rgb(0, 0, 52);
   padding: 16px;
-
+  .toast {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+  }
   .boxesContainer {
     width: 100%;
     height: 100%;

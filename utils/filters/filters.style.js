@@ -38,6 +38,7 @@ export const FiltersContainer = styled.div`
     border: 2px solid #ccc;
     border-radius: 4px;
     min-width: 102px;
+    width: 102px;
   }
 
   .link:hover {

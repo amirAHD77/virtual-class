@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
+// import ReactHlsPlayer from "react-hls-player";
 import { IoPlay } from "react-icons/io5";
+import dynamic from "next/dynamic";
 
 import Axios from "../axios";
 
 import { StreamContainer } from "./stream.style";
-
+const ReactHlsPlayer = dynamic(() => import("react-hls-player"), {
+  ssr: false,
+});
 const Stream = (props) => {
   const [Sconfig, setSConfig] = useState();
 
@@ -21,10 +25,10 @@ const Stream = (props) => {
   }, []);
   return (
     <StreamContainer>
-      {props.classData?.class?.class?.ac_stream?.config_url ? (
+      {props.classData?.class?.class?.isOnGoing ? (
         <div className="streamBox">
           <div className="r1_iframe_embed">
-            <iframe
+            {/* <iframe
               src={
                 "https://player.arvancloud.com/index.html?config=" +
                 props.classData.class.class.ac_stream.config_url
@@ -38,7 +42,16 @@ const Stream = (props) => {
               allowFullScreen={true}
               webkitallowfullscreen={true}
               mozallowfullscreen={true}
-            ></iframe>
+            ></iframe> */}
+            {props.classData?.class?.class?.ac_stream?.hls_playlist ? (
+              <ReactHlsPlayer
+                src={props.classData?.class?.class?.ac_stream?.hls_playlist}
+                autoPlay={false}
+                controls={false}
+                width="auto"
+                height="100%"
+              />
+            ) : null}
           </div>
         </div>
       ) : (

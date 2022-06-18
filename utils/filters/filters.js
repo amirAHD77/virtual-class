@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Button, Form, Modal, Row } from "react-bootstrap";
 
 import { FiltersContainer } from "./filters.style";
 import Axios from "../axios";
 import { useRouter } from "next/router";
+import AddQuestion from "./AddQuestion";
 
 const Filters = (props) => {
   const [links, setLinks] = useState({ link1: "", link2: "", link3: "" });
@@ -12,6 +13,7 @@ const Filters = (props) => {
   const Router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [status, setStatus] = useState(true);
+  const [openAddQuestion, setOpenAddQuestion] = useState(false);
   const pvHandler = () => {
     props.socket.emit("privateChat", {
       room: props.classData.class?.class?.name,
@@ -64,20 +66,52 @@ const Filters = (props) => {
 
   return (
     <FiltersContainer className="row">
+      <AddQuestion
+        socket={props.socket}
+        show={openAddQuestion}
+        setShow={setOpenAddQuestion}
+        roomName={props.classData?.class?.class?.name}
+      />
       <Modal
         dialogClassName="modal2"
         show={isOpen}
         onHide={() => setIsOpen(false)}
       >
-        <Button variant="primary" onClick={() => copy("1")} className="link">
-          RTMP لینک
-        </Button>
-        <Button variant="secondary" onClick={() => copy("2")} className="link">
-          RTMP کلید
-        </Button>
-        <Button variant="warning" onClick={() => copy("3")} className="link">
-          لینک کلاس
-        </Button>
+        <Row>
+          <Button variant="primary" onClick={() => copy("1")} className="link">
+            RTMP لینک
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => copy("2")}
+            className="link"
+          >
+            RTMP کلید
+          </Button>
+          <Button variant="warning" onClick={() => copy("3")} className="link">
+            لینک کلاس
+          </Button>
+        </Row>
+        <Row>
+          <Button
+            variant="primary"
+            onClick={() => setOpenAddQuestion(true)}
+            className="link"
+          >
+            تعریف نظرسنجی
+          </Button>
+          {/* <Button
+            var
+            iant="secondary"
+            onClick={() => copy("2")}
+            className="link"
+          >
+            RTMP کلید
+          </Button>
+          <Button variant="warning" onClick={() => copy("3")} className="link">
+            لینک کلاس
+          </Button> */}
+        </Row>
       </Modal>
       <div className="switchContainer col-12 col-md-4">
         <Form.Check

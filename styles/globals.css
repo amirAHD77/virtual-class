@@ -51,24 +51,45 @@ a {
   height: 100%;
   border: 0;
 }
-.dropdown-menu{
+.dropdown-menu {
   background-color: rgb(60, 90, 130) !important;
   padding: 8px 16px !important;
   border-radius: 6px !important;
   min-width: unset !important;
-  transform: translate(-16px, 26px) !important
+  transform: translate(-16px, 26px) !important;
 }
-.modal2>div{
+.modal2 > div > div {
   padding: 40px;
-  display:flex;
+  display: flex;
   justify-content: space-between;
   flex-direction: row;
-
 }
-.modal2>div>div{
+.modal2 > div > div > button {
   display: inline-flex;
-  
+  width: calc(100% / 4);
+  justify-content: center;
+  align-items: center;
 }
-.button:hover{
-  border: none
+.button:hover {
+  border: none;
+}
+.modal3 {
+  height: 80vh !important;
+  width: 80vw !important;
+  max-width: 85vw !important;
+  border-radius: 12px;
+}
+.modal3 > div {
+  height: 80vh !important;
+  border-radius: 12px;
+
+  width: 85vw !important;
+}
+.toast-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.toast-header > small {
+  cursor: pointer;
 }

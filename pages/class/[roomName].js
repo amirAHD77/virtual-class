@@ -10,7 +10,8 @@ import Stream from "../../utils/stream/stream";
 import Filters from "../../utils/filters/filters";
 import { useRouter } from "next/router";
 import Axios from "../../utils/axios";
-
+import { Toast, ToastContainer } from "react-bootstrap";
+import AnswerQuestion from "../../utils/filters/AnswerQuestion";
 const Admin = () => {
   const Router = useRouter();
 
@@ -22,6 +23,7 @@ const Admin = () => {
   const name = useRef();
   const [disableChat, setDisableChat] = useState(false);
   const [privateChat, setPrivateChat] = useState(false);
+  const [openAnswer, setOpenAnswer] = useState(false);
   const [classData, setClassData] = useState(null);
   const router = useRouter();
 
@@ -40,11 +42,7 @@ const Admin = () => {
       role.current = sessionStorage?.getItem("role")
         ? sessionStorage.getItem("role")
         : "STUDENT";
-      console.log(
-        router.query.firstName,
-        !sessionStorage.getItem("token"),
-        !sessionStorage.getItem("name")
-      );
+
       if (
         !router.query.firstName &&
         (!sessionStorage.getItem("token") || !sessionStorage.getItem("name"))
@@ -73,15 +71,14 @@ const Admin = () => {
       console.log(reason);
     });
     socket.current.on("roomUsers", (data) => {
-      console.log("data", data);
       setUsers(data.users);
     });
 
     socket.current.on("privateChat", (data) => {
-      console.log(data);
+      // console.log(data);
     });
     socket.current.on("isDuplicateUser", (data) => {
-      console.log("duplicate", data);
+      // console.log("duplicate", data);
       if (data === true) {
         window.alert("شما قبلا وارد شده اید");
         router.push(
@@ -94,7 +91,7 @@ const Admin = () => {
       }
     });
     socket.current.on("isKicked", (data) => {
-      console.log("kicked", data);
+      // console.log("kicked", data);
       if (data === true) {
         window.alert("شما از کلاس اخراج شدید");
         router.push(
@@ -128,19 +125,27 @@ const Admin = () => {
         setPrivateChat(false);
       } else {
         if (!data?.type && data?.length > -1) setMessages(data);
-        console.log(3434, data);
+        // console.log(3434, data);
       }
     });
     socket.current.on("pmessage", (data) => {
-      console.log("messages", data);
+      // console.log("messages", data);
       setMessages(data);
     });
-
+    socket.current.on("getVoteStudent", (msg) => {
+      console.log("getVo2teStudent", msg);
+    });
+    socket.current.on("answerVote", (msg) => {
+      console.log("answerVote", msg);
+    });
+    socket.current.on("createVote", (msg) => {
+      console.log("createVote", msg);
+    });
     socket.current.on("startStop", function (response) {
-      console.log("startStop", response); // ok
+      // console.log("startStop", response); // ok
     });
     return () => {
-      console.log("websocket unmounting!!!!!");
+      console.log("websock2et unmounting!!!!!");
       socket.current.off();
       socket.current.disconnect();
     };
@@ -159,7 +164,6 @@ const Admin = () => {
       Router.push("/login");
       return;
     }
-    console.log(router.query);
     const tokenAvailability = sessionStorage.getItem("token");
     try {
       if (role.current === "TEACHER" && sessionStorage.getItem("token")) {
@@ -224,22 +228,17 @@ const Admin = () => {
         room: classData?.class?.class?.name,
         type: role.current,
       },
-      function (response) {
-        console.log(123, response); // ok
-      }
+      function (response) {}
     );
   };
   const deleteMessage = async (id) => {
-    console.log(id);
     socket.current.emit(
       "deleteMessage",
       {
         messageId: id,
         room: classData.class?.class?.name,
       },
-      function (response) {
-        console.log(123, response); // ok
-      }
+      function (response) {}
     );
   };
 
@@ -251,23 +250,18 @@ const Admin = () => {
         socketId: socketId,
         room: classData.class?.class?.name,
       },
-      function (response) {
-        console.log(123, response); // ok
-      }
+      function (response) {}
     );
   };
 
   const startStop = async (status) => {
-    console.log("status", status);
     socket.current.emit(
       "startStop",
       {
         status: status,
         room: classData.class?.class?.name,
       },
-      function (response) {
-        console.log("startStop", response); // ok
-      }
+      function (response) {}
     );
   };
 
@@ -278,6 +272,11 @@ const Admin = () => {
         <link rel="shortcut icon" href="/images/inpoint connect logo PNG.png" />
       </Head>
       <div className="boxesContainer row">
+        <AnswerQuestion
+          socket={socket.current}
+          show={openAnswer}
+          setShow={setOpenAnswer}
+        />
         <div className="leftSide col-12 col-md-9">
           {role.current === "TEACHER" && (
             <div className="filtersBox">
@@ -287,6 +286,15 @@ const Admin = () => {
                 classData={classData}
               />
             </div>
+          )}
+          {role.current !== "TEACHER" && (
+            <Toast className="toast">
+              <Toast.Header>
+                <small onClick={() => setOpenAnswer(true)}>مشاهده</small>
+
+                <strong className="me-auto">سوال جدید</strong>
+              </Toast.Header>
+            </Toast>
           )}
           <div className="stream">
             <Stream classData={classData} role={role.current} />
