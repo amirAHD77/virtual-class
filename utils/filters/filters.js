@@ -92,26 +92,6 @@ const Filters = (props) => {
             لینک کلاس
           </Button>
         </Row>
-        <Row>
-          <Button
-            variant="primary"
-            onClick={() => setOpenAddQuestion(true)}
-            className="link"
-          >
-            تعریف نظرسنجی
-          </Button>
-          {/* <Button
-            var
-            iant="secondary"
-            onClick={() => copy("2")}
-            className="link"
-          >
-            RTMP کلید
-          </Button>
-          <Button variant="warning" onClick={() => copy("3")} className="link">
-            لینک کلاس
-          </Button> */}
-        </Row>
       </Modal>
       <div className="switchContainer col-12 col-md-4">
         <Form.Check
@@ -148,6 +128,12 @@ const Filters = (props) => {
           onClick={() => setIsOpen(true)}
         >
           تنظیمات
+        </Button>
+        <Button
+          onClick={() => setOpenAddQuestion(true)}
+          style={{ backgroundColor: "#e2e2e2", color: "#000" }}
+        >
+          نظرسنجی
         </Button>
       </div>
     </FiltersContainer>

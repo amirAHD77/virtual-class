@@ -1,27 +1,16 @@
 import React, { useState } from "react";
-import { Modal } from "react-bootstrap";
+import { Container, Modal, Row } from "react-bootstrap";
 import StyledDiv from "./questions.style";
 const AddQuestion = (props) => {
   const [question, setQuestion] = useState("");
+  const [showAnswer, setShowAnswer] = useState(false);
   const [answerList, setAnswerList] = useState(["", "", "", ""]);
   const [correctAnswer, setCorrectAnswer] = useState(null);
   const submit = () => {
-    console.log({
-      title: question,
-      room: props.roomName,
-      showAnswer: false,
-      uuid: sessionStorage.getItem("userId"),
-      questions: answerList.map((it, ind) => ({
-        id: ind + 1,
-        content: it,
-        isAnswer: ind === correctAnswer,
-        point: 0,
-      })),
-    });
     props.socket.emit("createVote", {
       title: question,
       room: props.roomName,
-      showAnswer: false,
+      showAnswer: showAnswer,
       uuid: sessionStorage.getItem("userId"),
       questions: answerList.map((it, ind) => ({
         id: ind + 1,
@@ -38,7 +27,7 @@ const AddQuestion = (props) => {
       onHide={() => props.setShow(false)}
     >
       <StyledDiv>
-        <h3>تعریف سوال</h3>
+        <h3>تعریف نظرسنجی</h3>
         <div className="heading">
           <label>سوال</label>
           <span onClick={() => setAnswerList([...answerList, ""])}>
@@ -50,6 +39,33 @@ const AddQuestion = (props) => {
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
         />
+        <Row>
+          <span>نمایش پاسخ</span>
+          <Container>
+            <input
+              checked={showAnswer}
+              className="me-3"
+              type="radio"
+              onChange={() => setShowAnswer(true)}
+              value={true}
+              name="true"
+            />
+            <label className="me-3" for="true">
+              بله
+            </label>
+            <input
+              checked={!showAnswer}
+              className="me-3"
+              type="radio"
+              value={false}
+              onChange={() => setShowAnswer(false)}
+              name="false"
+            />
+            <label className="me-3" for="false">
+              خیر
+            </label>
+          </Container>
+        </Row>
         <div className="answerContainer">
           {answerList.map((answer, index) => {
             return (
@@ -71,6 +87,16 @@ const AddQuestion = (props) => {
                     setAnswerList(temp);
                   }}
                 />
+                <span
+                  onClick={() => {
+                    const temp = [...answerList];
+                    temp.splice(index, 1);
+                    setAnswerList(temp);
+                  }}
+                  className="remove"
+                >
+                  x
+                </span>
               </div>
             );
           })}

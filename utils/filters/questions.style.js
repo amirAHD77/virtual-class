@@ -6,12 +6,14 @@ export default styled.div`
   display: flex;
   overflow: auto;
   flex-direction: column;
-  background-color: #333;
-  border: 2px solid #f90;
+  background-color: rgb(60, 90, 130) !important;
   border-radius: 12px;
   text-align: right;
   padding: 30px;
   color: #fff;
+  h3 {
+    text-align: center;
+  }
   .heading {
     display: flex;
     flex-direction: row-reverse;
@@ -36,14 +38,18 @@ export default styled.div`
       display: inline-flex;
       flex-direction: row-reverse;
       margin-bottom: 12px;
+      align-items: center;
       & > label {
         margin-left: 12px;
         font-size: 12px;
         width: 40px;
       }
-      & > input:nth-child(2) {
+      & > input:nth-child(3) {
         height: 100%;
-        margin-left: 5px;
+        margin-right: 12px;
+        text-align: right;
+        border-radius: 8px;
+        padding: 4px;
       }
     }
   }
@@ -51,12 +57,31 @@ export default styled.div`
     border-radius: 12px;
     margin-top: 15px;
     min-height: 80px;
+    margin-bottom: 12px;
+    text-align: right;
+    padding: 12px;
   }
   .submitBtn {
-    height: 30px;
+    height: 40px;
     background-color: #f90;
+    margin: auto;
     border-radius: 8px;
-    width: 90px;
+    width: 200px;
+  }
+  .remove {
+    border: 2px solid red;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: tomato;
+    margin-right: 15px;
+    font-size: 20px;
+    padding-right: 1px;
+    color: black;
   }
   .answerNum {
     width: unset !important;

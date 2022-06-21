@@ -21,12 +21,12 @@ const Admin = () => {
   const role = useRef();
   const socket = useRef();
   const name = useRef();
+  const [question, setQuestion] = useState(null);
   const [disableChat, setDisableChat] = useState(false);
   const [privateChat, setPrivateChat] = useState(false);
   const [openAnswer, setOpenAnswer] = useState(false);
   const [classData, setClassData] = useState(null);
   const router = useRouter();
-
   useEffect(() => {
     if (typeof window !== undefined) {
       setToken(
@@ -82,11 +82,13 @@ const Admin = () => {
       if (data === true) {
         window.alert("شما قبلا وارد شده اید");
         router.push(
-          window.location.origin +
-            "/login?forStudent=true&type=" +
-            classData?.class?.class?.login_type +
-            " &href=" +
-            window.location.href
+          role.current === "TEACHER"
+            ? "/login"
+            : window.location.origin +
+                "/login?forStudent=true&type=" +
+                classData?.class?.class?.login_type +
+                " &href=" +
+                window.location.href
         );
       }
     });
@@ -134,6 +136,7 @@ const Admin = () => {
     });
     socket.current.on("getVoteStudent", (msg) => {
       console.log("getVo2teStudent", msg);
+      setQuestion(msg);
     });
     socket.current.on("answerVote", (msg) => {
       console.log("answerVote", msg);
@@ -275,6 +278,7 @@ const Admin = () => {
         <AnswerQuestion
           socket={socket.current}
           show={openAnswer}
+          question={question}
           setShow={setOpenAnswer}
         />
         <div className="leftSide col-12 col-md-9">
@@ -287,15 +291,19 @@ const Admin = () => {
               />
             </div>
           )}
-          {role.current !== "TEACHER" && (
-            <Toast className="toast">
-              <Toast.Header>
-                <small onClick={() => setOpenAnswer(true)}>مشاهده</small>
 
-                <strong className="me-auto">سوال جدید</strong>
-              </Toast.Header>
-            </Toast>
-          )}
+          <Toast
+            show={role.current !== "TEACHER" && question?.id}
+            onClose={() => setQuestion(null)}
+            className="toast"
+          >
+            <Toast.Header>
+              <small onClick={() => setOpenAnswer(true)}>مشاهده</small>
+
+              <strong className="me-auto">سوال جدید</strong>
+            </Toast.Header>
+          </Toast>
+
           <div className="stream">
             <Stream classData={classData} role={role.current} />
           </div>

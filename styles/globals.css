@@ -63,12 +63,22 @@ a {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+  background-color: rgb(60, 90, 130) !important;
 }
 .modal2 > div > div > button {
   display: inline-flex;
   width: calc(100% / 4);
   justify-content: center;
   align-items: center;
+}
+.btn {
+  border: none !important;
+}
+.btn:visited,
+.btn:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 .button:hover {
   border: none;

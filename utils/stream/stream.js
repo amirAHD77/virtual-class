@@ -25,7 +25,7 @@ const Stream = (props) => {
   }, []);
   return (
     <StreamContainer>
-      {props.classData?.class?.class?.isOnGoing ? (
+      {true ? (
         <div className="streamBox">
           <div className="r1_iframe_embed">
             {/* <iframe
@@ -46,7 +46,7 @@ const Stream = (props) => {
             {props.classData?.class?.class?.ac_stream?.hls_playlist ? (
               <ReactHlsPlayer
                 src={props.classData?.class?.class?.ac_stream?.hls_playlist}
-                autoPlay={false}
+                autoPlay={true}
                 controls={false}
                 width="auto"
                 height="100%"
