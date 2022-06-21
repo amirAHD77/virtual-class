@@ -25,7 +25,7 @@ const Stream = (props) => {
   }, []);
   return (
     <StreamContainer>
-      {true ? (
+      {props.classData?.class?.class?.isOnGoing ? (
         <div className="streamBox">
           <div className="r1_iframe_embed">
             {/* <iframe
