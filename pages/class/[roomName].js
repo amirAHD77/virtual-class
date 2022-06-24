@@ -68,7 +68,7 @@ const Admin = () => {
       console.log("error", as);
     });
     socket.current.on("disconnect", (reason) => {
-      console.log(reason);
+      console.log("disconnect", reason);
     });
     socket.current.on("roomUsers", (data) => {
       setUsers(data.users);
@@ -163,7 +163,6 @@ const Admin = () => {
 
   const getClassData = async () => {
     if (!Router.query.roomName) {
-      console.log(11111111);
       Router.push("/login");
       return;
     }
@@ -280,6 +279,8 @@ const Admin = () => {
           show={openAnswer}
           question={question}
           setShow={setOpenAnswer}
+          roomName={classData?.class?.class?.name}
+          closeToast={() => setQuestion(null)}
         />
         <div className="leftSide col-12 col-md-9">
           {role.current === "TEACHER" && (
@@ -293,14 +294,19 @@ const Admin = () => {
           )}
 
           <Toast
-            show={role.current !== "TEACHER" && question?.id}
+            show={
+              role.current !== "TEACHER" && question !== null && question?.id
+            }
             onClose={() => setQuestion(null)}
             className="toast"
           >
             <Toast.Header>
-              <small onClick={() => setOpenAnswer(true)}>مشاهده</small>
-
-              <strong className="me-auto">سوال جدید</strong>
+              <strong
+                onClick={() => setOpenAnswer(true)}
+                className="me-auto cursor-pointer"
+              >
+                مشاهده سوال جدید
+              </strong>
             </Toast.Header>
           </Toast>
 

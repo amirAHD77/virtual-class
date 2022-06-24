@@ -7,6 +7,10 @@ const AddQuestion = (props) => {
   const [answerList, setAnswerList] = useState(["", "", "", ""]);
   const [correctAnswer, setCorrectAnswer] = useState(null);
   const submit = () => {
+    props.setShow(false);
+    props.socket.emit("deleteVote", {
+      room: props.roomName,
+    });
     props.socket.emit("createVote", {
       title: question,
       room: props.roomName,

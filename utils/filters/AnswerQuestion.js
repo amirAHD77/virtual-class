@@ -4,7 +4,7 @@ import StyledDiv from "./questions.style";
 const AddQuestion = (props) => {
   const [item, setItem] = useState(props.question);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  console.log(props);
+  const [showAnswer, setShowAnswer] = useState(false);
   React.useLayoutEffect(() => {
     setItem(props.question);
   }, [props.question]);
@@ -16,6 +16,12 @@ const AddQuestion = (props) => {
       uuid: sessionStorage.getItem("userId"),
       answer: selectedAnswer,
     });
+    if (item.showAnswer) {
+      setShowAnswer(true);
+      return;
+    }
+    props.setShow(false);
+    props.closeToast();
   };
   return (
     <Modal
@@ -40,7 +46,18 @@ const AddQuestion = (props) => {
                       type="radio"
                       onChange={() => setSelectedAnswer(index)}
                     />{" "}
-                    <span>{ans.content}</span>
+                    <span
+                      style={{
+                        color:
+                          showAnswer && item.showAnswer && ans.isAnswer
+                            ? "#78f542"
+                            : showAnswer && item.showAnswer && !ans.isAnswer
+                            ? "red"
+                            : "white",
+                      }}
+                    >
+                      {ans.content}
+                    </span>
                     {/* <input
                   type="text"
                   value={answer}

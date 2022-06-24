@@ -69,7 +69,7 @@ const Filters = (props) => {
       <AddQuestion
         socket={props.socket}
         show={openAddQuestion}
-        setShow={setOpenAddQuestion}
+        setShow={(val) => setOpenAddQuestion(val)}
         roomName={props.classData?.class?.class?.name}
       />
       <Modal

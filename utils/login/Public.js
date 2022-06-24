@@ -26,7 +26,6 @@ const Public = () => {
       initialValues={{ mob_number: "", firstName: "", lastName: "" }}
       validationSchema={SecondSchema}
       onSubmit={(values) => {
-        console.log("values", values);
         submit(values);
         // checkUser(values);
       }}

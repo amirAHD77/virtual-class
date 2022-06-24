@@ -29,9 +29,7 @@ export default styled.div`
     color: #fff;
     display: flex;
     margin-top: 35px;
-
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
+    flex-direction: column;
     width: 100%;
     & > div {
       margin-left: 12px;
@@ -53,6 +51,7 @@ export default styled.div`
       }
     }
   }
+
   .textArea {
     border-radius: 12px;
     margin-top: 15px;

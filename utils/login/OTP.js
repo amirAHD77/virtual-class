@@ -128,7 +128,6 @@ const OTP = (props) => {
       initialValues={{ verifyCode: "" }}
       validationSchema={SecondSchema}
       onSubmit={(values) => {
-        console.log("values", values);
         stepTwoHandler(values);
       }}
     >
