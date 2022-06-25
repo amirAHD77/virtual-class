@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export default styled.div`
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   overflow: auto;
   flex-direction: column;
@@ -60,15 +60,31 @@ export default styled.div`
     text-align: right;
     padding: 12px;
   }
+  .btnContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
   .submitBtn {
-    height: 40px;
+    min-height: 40px;
     background-color: #f90;
-    margin: auto;
     border-radius: 8px;
     width: 200px;
+    border: 0;
+  }
+
+  .cancelBtn {
+    min-height: 40px;
+    background-color: tomato;
+    border-radius: 8px;
+    width: 200px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4px;
+    cursor: pointer;
   }
   .remove {
-    border: 2px solid red;
     border-radius: 50%;
     width: 30px;
     height: 30px;
@@ -76,13 +92,61 @@ export default styled.div`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    background-color: tomato;
+    background-color: white;
     margin-right: 15px;
-    font-size: 20px;
+    font-size: 16px;
     padding-right: 1px;
     color: black;
   }
   .answerNum {
     width: unset !important;
+    min-width: 8px;
+    text-align: center;
+  }
+
+  .resultContainer {
+    display: flex;
+    flex-direction: row-reverse;
+    text-align: right;
+    margin-top: 32px;
+  }
+
+  .resultPercent {
+    font-size: 20px;
+    width: 50px;
+  }
+
+  .resultContentContainer {
+    margin-right: 16px;
+    width: 300px;
+    direction: rtl;
+  }
+  .resultContent {
+    font-size: 18px;
+  }
+
+  .resultProgress {
+  }
+
+  .resultCount {
+    margin-right: 16px;
+    padding-left: 8px;
+    font-size: 18px;
+  }
+
+  .newResultBtn {
+    background-color: #7090e8;
+    font-size: 18px;
+    color: #fff;
+    padding: 8px 16px;
+    text-align: left;
+    width: 190px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding-left: 8px;
+    padding-right: 8px;
   }
 `;

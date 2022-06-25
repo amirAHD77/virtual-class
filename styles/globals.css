@@ -84,14 +84,19 @@ a {
   border: none;
 }
 .modal3 {
-  height: 80vh !important;
-  width: 80vw !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 10% !important;
+  /* height: 80vh !important; */
+  width: 86vw !important;
   max-width: 85vw !important;
   border-radius: 12px;
 }
 .modal3 > div {
-  height: 80vh !important;
+  /* height: 80vh !important; */
   border-radius: 12px;
+  background-color: inherit;
+  border: none;
 
   width: 85vw !important;
 }
@@ -102,4 +107,16 @@ a {
 }
 .toast-header > small {
   cursor: pointer;
+}
+
+.toast-header {
+  cursor: pointer;
+}
+
+.me-auto {
+  margin-left: auto !important;
+}
+
+.toast-header > button {
+  display: none;
 }

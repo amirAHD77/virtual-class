@@ -71,6 +71,7 @@ const Filters = (props) => {
         show={openAddQuestion}
         setShow={(val) => setOpenAddQuestion(val)}
         roomName={props.classData?.class?.class?.name}
+        voteResults={props.voteResults}
       />
       <Modal
         dialogClassName="modal2"

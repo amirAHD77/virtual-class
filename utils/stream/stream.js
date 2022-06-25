@@ -6,9 +6,11 @@ import dynamic from "next/dynamic";
 import Axios from "../axios";
 
 import { StreamContainer } from "./stream.style";
+
 // const ReactHlsPlayer = dynamic(() => import("react-hls-player"), {
 //   ssr: false,
 // });
+
 const Stream = (props) => {
   const [Sconfig, setSConfig] = useState();
 
@@ -43,6 +45,7 @@ const Stream = (props) => {
               webkitallowfullscreen={true}
               mozallowfullscreen={true}
             ></iframe> */}
+
             {/* {props.classData?.class?.class?.ac_stream?.hls_playlist ? (
               <ReactHlsPlayer
                 src={props.classData?.class?.class?.ac_stream?.hls_playlist}

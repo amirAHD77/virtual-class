@@ -22,6 +22,7 @@ const Admin = () => {
   const socket = useRef();
   const name = useRef();
   const [question, setQuestion] = useState(null);
+  const [voteResults, setVoteResults] = useState(null);
   const [disableChat, setDisableChat] = useState(false);
   const [privateChat, setPrivateChat] = useState(false);
   const [openAnswer, setOpenAnswer] = useState(false);
@@ -137,6 +138,10 @@ const Admin = () => {
     socket.current.on("getVoteStudent", (msg) => {
       console.log("getVo2teStudent", msg);
       setQuestion(msg);
+    });
+    socket.current.on("getVoteTeacher", (msg) => {
+      console.log("getVoteTeacher", msg);
+      setVoteResults(msg);
     });
     socket.current.on("answerVote", (msg) => {
       console.log("answerVote", msg);
@@ -289,15 +294,17 @@ const Admin = () => {
                 startStop={startStop}
                 socket={socket.current}
                 classData={classData}
+                voteResults={voteResults}
               />
             </div>
           )}
 
           <Toast
+            onClick={() => setOpenAnswer(true)}
             show={
               role.current !== "TEACHER" && question !== null && question?.id
             }
-            onClose={() => setQuestion(null)}
+            // onClose={() => setQuestion(null)}
             className="toast"
           >
             <Toast.Header>
@@ -305,7 +312,7 @@ const Admin = () => {
                 onClick={() => setOpenAnswer(true)}
                 className="me-auto cursor-pointer"
               >
-                مشاهده سوال جدید
+                نظرسنجی
               </strong>
             </Toast.Header>
           </Toast>
