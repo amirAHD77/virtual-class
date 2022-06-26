@@ -211,10 +211,14 @@ const Admin = () => {
             },
           }
         );
+        console.log("res", res);
         setClassData({ class: res.data.data });
       }
     } catch (err) {
-      console.log(err);
+      window.alert(
+        "مشکلی در برقراری با سرور پیش امده لطفا صفحه را refresh کنید."
+      );
+      console.log("err", err);
     }
   };
   const joinRoom = () => {

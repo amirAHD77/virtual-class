@@ -67,34 +67,36 @@ export default styled.div`
   }
   .submitBtn {
     min-height: 40px;
-    background-color: #f90;
+    background-color: #5f88be;
     border-radius: 8px;
-    width: 200px;
+    width: 100px;
     border: 0;
+    color: #fff;
+    margin-right: 4px;
   }
 
   .cancelBtn {
     min-height: 40px;
-    background-color: tomato;
+    background-color: #e2e2e2;
     border-radius: 8px;
-    width: 200px !important;
+    width: 100px !important;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 4px;
     cursor: pointer;
+    color: #000;
   }
   .remove {
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     background-color: white;
     margin-right: 15px;
-    font-size: 16px;
+    font-size: 14px;
     padding-right: 1px;
     color: black;
   }

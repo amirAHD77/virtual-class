@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-// import ReactHlsPlayer from "react-hls-player";
 import { IoPlay } from "react-icons/io5";
 import dynamic from "next/dynamic";
+// import ReactHlsPlayer from "react-hls-player";
 
 import Axios from "../axios";
 
 import { StreamContainer } from "./stream.style";
-
-// const ReactHlsPlayer = dynamic(() => import("react-hls-player"), {
-//   ssr: false,
-// });
 
 const Stream = (props) => {
   const [Sconfig, setSConfig] = useState();
@@ -27,7 +23,7 @@ const Stream = (props) => {
   }, []);
   return (
     <StreamContainer>
-      {true ? (
+      {props.classData?.class?.class?.isOnGoing ? (
         <div className="streamBox">
           <div className="r1_iframe_embed">
             {/* <iframe

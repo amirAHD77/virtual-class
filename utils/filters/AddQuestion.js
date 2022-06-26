@@ -149,15 +149,15 @@ const AddQuestion = (props) => {
               })}
             </div>
             <div className="btnContainer">
+              <button onClick={() => submit()} className="submitBtn">
+                ثبت
+              </button>
               <div
                 onClick={() => setPageStatus("results")}
                 className="cancelBtn"
               >
                 لغو
               </div>
-              <button onClick={() => submit()} className="submitBtn">
-                ثبت
-              </button>
             </div>
           </>
         )}
