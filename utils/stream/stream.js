@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { IoPlay } from "react-icons/io5";
 import dynamic from "next/dynamic";
 // import ReactHlsPlayer from "react-hls-player";
-
 import Axios from "../axios";
 
 import { StreamContainer } from "./stream.style";
+const ReactHlsPlayer = dynamic(() => import("react-hls-player"), {
+  ssr: false,
+});
 
 const Stream = (props) => {
   const [Sconfig, setSConfig] = useState();
@@ -42,15 +44,15 @@ const Stream = (props) => {
               mozallowfullscreen={true}
             ></iframe> */}
 
-            {/* {props.classData?.class?.class?.ac_stream?.hls_playlist ? (
+            {props.classData?.class?.class?.ac_stream?.hls_playlist ? (
               <ReactHlsPlayer
                 src={props.classData?.class?.class?.ac_stream?.hls_playlist}
                 autoPlay={true}
-                controls={false}
+                controls={true}
                 width="auto"
                 height="100%"
               />
-            ) : null} */}
+            ) : null}
           </div>
         </div>
       ) : (
