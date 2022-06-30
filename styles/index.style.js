@@ -7,6 +7,7 @@ const AdminContainer = styled.div`
   padding: 16px;
   .toast {
     width: 100%;
+    position: absolute;
     display: flex;
     flex-direction: row-reverse;
   }
@@ -19,10 +20,14 @@ const AdminContainer = styled.div`
   .leftSide {
     height: 100%;
     padding: 0;
+    position: relative;
   }
 
   .rightSide {
     height: 100%;
+    @media (max-width: 460px) {
+      margin-top: 37px;
+    }
   }
 
   .onlineUsersBox {
