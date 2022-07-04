@@ -13,6 +13,9 @@ export const FiltersContainer = styled.div`
     display: flex;
     flex-direction: row;
     direction: rtl;
+    @media only screen and (max-device-height: 640px) and (orientation: landscape) {
+      width: unset;
+    }
   }
 
   .label {
@@ -28,6 +31,9 @@ export const FiltersContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    @media only screen and (max-device-height: 640px) and (orientation: landscape) {
+      width: unset;
+    }
   }
 
   .link {

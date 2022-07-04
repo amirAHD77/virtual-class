@@ -25,6 +25,7 @@ const Stream = (props) => {
   }, []);
   return (
     <StreamContainer>
+      {console.log(props.classData?.class)}
       {props.classData?.class?.display?.status ? (
         <div className="streamBox">
           <div className="r1_iframe_embed">
@@ -68,4 +69,4 @@ const Stream = (props) => {
   );
 };
 
-export default Stream;
+export default React.memo(Stream);
