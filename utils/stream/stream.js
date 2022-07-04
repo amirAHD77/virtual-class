@@ -25,9 +25,13 @@ const Stream = (props) => {
   }, []);
   return (
     <StreamContainer>
-      {console.log(props.classData?.class)}
-      {props.classData?.class?.display?.status ? (
+      {console.log("class data", props.classData)}
+      {props.classData?.class?.display?.status ||
+      props.classData?.class?.class?.display?.status ? (
         <div className="streamBox">
+          {console.log(
+            "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+          )}
           <div className="r1_iframe_embed">
             {/* <iframe
               src={
@@ -45,9 +49,13 @@ const Stream = (props) => {
               mozallowfullscreen={true}
             ></iframe> */}
 
-            {props.classData?.class?.class?.ac_stream?.hls_playlist ? (
+            {props.classData?.class?.class?.ac_stream?.hls_playlist ||
+            props.classData?.class?.class?.class?.ac_stream?.hls_playlist ? (
               <ReactHlsPlayer
-                src={props.classData?.class?.class?.ac_stream?.hls_playlist}
+                src={
+                  props.classData?.class?.class?.ac_stream?.hls_playlist ||
+                  props.classData?.class?.class?.class?.ac_stream?.hls_playlist
+                }
                 autoPlay={true}
                 controls={true}
                 width="auto"
