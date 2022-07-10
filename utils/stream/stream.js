@@ -74,4 +74,4 @@ const Stream = (props) => {
   );
 };
 
-export default Stream;
+export default React.memo(Stream);

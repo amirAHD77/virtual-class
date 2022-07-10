@@ -49,6 +49,10 @@ export const StreamContainer = styled.div`
     height: auto;
     max-height: 100% !important;
     padding-top: 55.25%;
+    @media only screen and (max-device-height: 640px) and (orientation: landscape) {
+      padding-top: 0;
+      margin-bottom: 2vh;
+    }
   }
 
   .r1_iframe_embed video {

@@ -28,14 +28,24 @@ const AdminContainer = styled.div`
     @media (max-width: 460px) {
       margin-top: 37px;
     }
+    @media only screen and (max-device-height: 640px) and (orientation: landscape) {
+      padding-top: 50px;
+    }
   }
 
   .onlineUsersBox {
     height: 49%;
+    @media only screen and (max-device-height: 640px) and (orientation: landscape) {
+      height: 100%;
+    }
   }
 
   .chatBox {
     height: 49%;
+
+    @media only screen and (max-device-height: 640px) and (orientation: landscape) {
+      height: 100%;
+    }
     margin-top: 4%;
   }
 

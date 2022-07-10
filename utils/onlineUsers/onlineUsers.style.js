@@ -13,6 +13,9 @@ export const OnlineUsersContainer = styled.div`
     flex-direction: row;
     justify-content: space-between;
     height: 8%;
+    @media only screen and (max-device-height: 640px) and (orientation: landscape) {
+      height: 13%;
+    }
   }
 
   .headerTitle {
