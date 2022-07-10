@@ -44,6 +44,9 @@ const AddQuestion = (props) => {
       <StyledDiv>
         {item && (
           <>
+            <p className="closeBtn" onClick={() => props.setShow(false)}>
+              X
+            </p>
             <p>{item.title}</p>
             <div className="answerContainer">
               {item.questions?.map((ans, index) => {

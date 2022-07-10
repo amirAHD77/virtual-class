@@ -29,9 +29,6 @@ const Stream = (props) => {
       {props.classData?.class?.display?.status ||
       props.classData?.class?.class?.display?.status ? (
         <div className="streamBox">
-          {console.log(
-            "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
-          )}
           <div className="r1_iframe_embed">
             {/* <iframe
               src={

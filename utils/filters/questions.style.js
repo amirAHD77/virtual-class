@@ -147,6 +147,12 @@ export default styled.div`
     cursor: pointer;
   }
 
+  .closeBtn {
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+  }
+
   @media screen and (max-width: 768px) {
     padding-left: 8px;
     padding-right: 8px;

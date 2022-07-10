@@ -63,7 +63,7 @@ const AddQuestion = (props) => {
                           />
                         </div>
                       </div>
-                      <div className="resultCount"> {it.point}</div>نفر
+                      {/* <div className="resultCount"> {it.point}</div>نفر */}
                     </div>
                   );
                 })}
