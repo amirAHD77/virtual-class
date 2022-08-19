@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 const UserPass = (props) => {
   const [wrongPass, setWrongPass] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [netErr, setNetErr] = useState(false);
+
   const router = useRouter();
   const checkUser = async (val) => {
     try {
@@ -48,7 +50,11 @@ const UserPass = (props) => {
         // router.push("/class");
       }
     } catch (err) {
-      setWrongPass(true);
+      if (err.message === "Network Error") {
+        setNetErr(true);
+      } else {
+        setWrongPass(true);
+      }
       console.log("err", err);
       setLoading(false);
     }
@@ -102,6 +108,7 @@ const UserPass = (props) => {
 
           <label className="w-100 err">
             {wrongPass ? "نام کاربری یا رمز عبور صحیح نیست" : null}
+            {netErr && "اتصال اینترنت دستگاه را مجددا چک کنید"}
             <button
               // disabled={loading}
               className="button w-100"

@@ -29,6 +29,8 @@ const Admin = () => {
   const [classData, setClassData] = useState(null);
   const router = useRouter();
   useEffect(() => {
+    const temp = sessionStorage.getItem("url");
+
     if (typeof window !== undefined) {
       setToken(
         sessionStorage?.getItem("token")
@@ -48,7 +50,11 @@ const Admin = () => {
         !router.query.firstName &&
         (!sessionStorage.getItem("token") || !sessionStorage.getItem("name"))
       ) {
-        Router.push("/login");
+        if (sessionStorage.getItem("url") != null) {
+          router.push(temp);
+        } else {
+          // Router.push("/login");
+        }
       }
     }
     socket.current = io(api.socket, {
@@ -168,7 +174,11 @@ const Admin = () => {
 
   const getClassData = async () => {
     if (!Router.query.roomName) {
-      Router.push("/login");
+      if (sessionStorage.getItem("url") != null) {
+        router.push(sessionStorage.getItem("url"));
+      } else {
+        Router.push("/login");
+      }
       return;
     }
     const tokenAvailability = sessionStorage.getItem("token");
@@ -223,6 +233,8 @@ const Admin = () => {
   };
   const joinRoom = () => {
     const userId = sessionStorage.getItem("userId");
+
+    console.log("userId", userId);
 
     socket.current.emit("joinRoom", {
       fullName: name.current,

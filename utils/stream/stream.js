@@ -30,7 +30,7 @@ const Stream = (props) => {
       props.classData?.class?.class?.display?.status ? (
         <div className="streamBox">
           <div className="r1_iframe_embed">
-            {/* <iframe
+            <iframe
               src={
                 "https://player.arvancloud.com/index.html?config=" +
                 props.classData.class.class.ac_stream.config_url
@@ -44,9 +44,9 @@ const Stream = (props) => {
               allowFullScreen={true}
               webkitallowfullscreen={true}
               mozallowfullscreen={true}
-            ></iframe> */}
+            ></iframe>
 
-            {props.classData?.class?.class?.ac_stream?.hls_playlist ||
+            {/* {props.classData?.class?.class?.ac_stream?.hls_playlist ||
             props.classData?.class?.class?.class?.ac_stream?.hls_playlist ? (
               <ReactHlsPlayer
                 src={
@@ -58,7 +58,7 @@ const Stream = (props) => {
                 width="auto"
                 height="100%"
               />
-            ) : null}
+            ) : null} */}
           </div>
         </div>
       ) : (
