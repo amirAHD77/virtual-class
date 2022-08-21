@@ -83,7 +83,11 @@ const Filters = (props) => {
         onHide={() => setIsOpen(false)}
       >
         <Row>
-          <Button variant="primary" onClick={() => copy("1")} className="link">
+          <Button
+            variant="secondary"
+            onClick={() => copy("1")}
+            className="link"
+          >
             RTMP لینک
           </Button>
           <Button
@@ -93,7 +97,11 @@ const Filters = (props) => {
           >
             RTMP کلید
           </Button>
-          <Button variant="warning" onClick={() => copy("3")} className="link">
+          <Button
+            variant="secondary"
+            onClick={() => copy("3")}
+            className="link"
+          >
             لینک کلاس
           </Button>
         </Row>

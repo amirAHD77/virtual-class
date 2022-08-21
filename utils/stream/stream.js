@@ -20,6 +20,8 @@ const Stream = (props) => {
     }
   };
 
+  console.log("props.classData.class.class", props.classData.class.class);
+
   useEffect(() => {
     getSConfig();
   }, []);
